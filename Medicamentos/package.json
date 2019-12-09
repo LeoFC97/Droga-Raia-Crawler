@@ -15,6 +15,6 @@
   "scripts": {
     "links": "node src/gerarLinks.js",
     "array": "nonde src/transformarLinksEmArray.js",
-    "json": "node src/index.js"
+    "json": "node src/json.js"
   }
 }
