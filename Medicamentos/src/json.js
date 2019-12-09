@@ -2,6 +2,7 @@ NODE_OPTIONS="–max-old-space-size=2048";
 const links = require('./transformarLinksEmArray')
 const Crawler = require("crawler")
 const fs = require('fs');
+const path = require('path')
 
 array = [];
 const c = new Crawler({
@@ -87,8 +88,9 @@ const c = new Crawler({
 c.queue(links)
 
 let escreverJson = (array) => {
+  const ultimaPosicaoDoArray = array[array.length-1]
   console.log('Chamou Escrever');
-  fs.open('C:\\Users\\leona\\Documents\\crawler\\Medicamentos\\medicamentos.json', 'as+', (err, arrayComOsLinks) => {
+  fs.open(path.join(__dirname, '../')+'medicamentos.json', 'as+', (err, arrayComOsLinks) => {
         if (err) {
           if (err.code === 'EEXIST') {
             console.error('myfile already exists');
@@ -97,7 +99,7 @@ let escreverJson = (array) => {
           throw err;
         }
       })
-      fs.writeFile('C:\\Users\\leona\\Documents\\crawler\\Medicamentos\\medicamentos.json', `${JSON.stringify(array)},`, function (erro) {
+      fs.writeFile(path.join(__dirname, '../')+'medicamentos.json', `${JSON.stringify(array)},`, function (erro) {
         if (erro) {
           console.log(erro)
         }

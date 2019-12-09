@@ -1,5 +1,6 @@
 const Crawler = require("crawler")
 const fs = require('fs');
+const path = require('path')
 
 var arrayComOsLinks = []
 
@@ -19,7 +20,7 @@ const c = new Crawler({
       for (i = 2; i < botoesComOsLinks.length; i++) {
         arrayComOsLinks.push(botoesComOsLinks[i].attribs.href)
       }
-      fs.open('C:\\Users\\leona\\Documents\\crawler\\Crawler\\links.txt', 'as+', (err, arrayComOsLinks) => {
+      fs.open(path.join(__dirname, '../')+'links.txt', 'as+', (err, arrayComOsLinks) => {
         if (err) {
           if (err.code === 'EEXIST') {
             console.error('myfile already exists');
@@ -28,7 +29,8 @@ const c = new Crawler({
           throw err;
         }
       })
-      fs.writeFile("C:\\Users\\leona\\Documents\\crawler\\Crawler\\links.txt", arrayComOsLinks.join('\n'), function (erro) {
+      
+      fs.writeFile(path.join(__dirname, '../')+'links.txt', arrayComOsLinks.join('\n'), function (erro) {
         if (erro) {
           console.log(erro)
         }
