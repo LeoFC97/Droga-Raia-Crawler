@@ -1,5 +1,5 @@
 {
-  "name": "Crawler",
+  "name": "Crawler-BelezaEPerfumaria",
   "version": "1.0.0",
   "main": "index.js",
   "author": "LeoFC97 <leonardo.fc2@outlook.com>",
@@ -17,6 +17,6 @@
     "links": "node src/gerarLinks.js",
     "array": "nonde src/transformarLinksEmArray.js",
     "json": "node  --max-old-space-size=8192 src/json.js",
-    "medicamentos": "node src/gerarLinks.js  && node  --max-old-space-size=8192 src/json.js"
+    "beleza": "node src/gerarLinks.js  && node  --max-old-space-size=8192 src/json.js"
   }
 }
