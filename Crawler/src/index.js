@@ -1,8 +1,9 @@
+NODE_OPTIONS="–max-old-space-size=2048";
 const links = require('./transformarLinksEmArray')
 const Crawler = require("crawler")
 const fs = require('fs');
 
-
+array = [];
 const c = new Crawler({
   maxConnections: 10,
   // This will be called for each crawled page
@@ -14,49 +15,80 @@ const c = new Crawler({
       // $ is Cheerio by default
       //a lean implementation of core jQuery designed specifically for the server
       var datas = $(`.data`)
-      var codigoDoProduto = datas[0].children[0].data
-      var ean = datas[1].children[0].data
-      var peso = datas[2].children[0].data
-      var quantidade = datas[3].children[0].data
-      var marca = datas[4].children[0].data
-      var fabricante = datas[5].children[0].data
+      try{
+        var codigoDoProduto = datas[0].children[0].data
+      }catch{
+        var codigoDoProduto = "";
+      }
+      try{
+        var ean = datas[1].children[0].data
+
+
+
+
+      }catch{
+        var ean  = "";
+      }
+      try{
+        var peso = datas[2].children[0].data
+      }catch{
+        var peso  = "";
+      }
+      try{
+        var quantidade = datas[3].children[0].data
+      }catch{
+        var quantidade  = "";
+      }
+      try{
+        var marca = datas[4].children[0].data
+      }catch{
+        var marca  = "";
+      }
+      try{
+        var fabricante = datas[5].children[0].data
+      }catch{
+        var fabricante  = "";
+      }
       try {
         if (datas[7].children[0].data) {
           registroMS = datas[7].children[0].data
         }
       } catch (error) {
-        registroMS = "vazio"
+        registroMS = ""
       }
       try {
         if (datas[8].children[0].data) {
           principioAtivo = datas[8].children[0].data
         }
       } catch (error) {
-        principioAtivo = "vazio"
+        principioAtivo = ""
       }
       try {
         if (datas[9].children[0].data) {
           dosagem = datas[9].children[0].data
         }
       } catch (error) {
-        dosagem = "vazio"
+        dosagem = ""
       }
+      var preco = $('.cifra')
+      try {
+        preco = preco[1].next.next.attribs.content
+      } catch (error) {
+        preco=""
+      }
+      var obj = { codigoDoProduto,  ean, peso, quantidade, marca, fabricante, registroMS, principioAtivo, dosagem, preco};
+      array.push(obj)
+      array.length == links.length ? escreverJson(array) : null
+    }
+    done();
+  }
+})
 
+c.queue(links)
 
-
-      var json = `{
-        "codigoDoProduto":"${codigoDoProduto}",
-        "ean":"${ean}",
-        "peso":"${peso}",
-        "quantidade":"${quantidade}",
-        "marca":"${marca}",
-        "fabricante":"${fabricante}",
-        "registroMS":"${registroMS}",
-        "principioAtivo":"${principioAtivo}",
-        "dosagem":"${dosagem}"
-      }`;
-      obj = JSON.parse(json);
-      fs.open('D:\\ProjetosDoGit\\Crawler\\tudo.json', 'as+', (err, arrayComOsLinks) => {
+let escreverJson = (array) => {
+  console.log('Chamou Escrever');
+  fs.open('C:\\Users\\leona\\Documents\\crawler\\Crawler\\tudo.json', 'as+', (err, arrayComOsLinks) => {
         if (err) {
           if (err.code === 'EEXIST') {
             console.error('myfile already exists');
@@ -65,18 +97,9 @@ const c = new Crawler({
           throw err;
         }
       })
-      fs.writeFile("D:\\ProjetosDoGit\\Crawler\\tudo.json", `${JSON.stringify(obj)},`, function (erro) {
+      fs.writeFile('C:\\Users\\leona\\Documents\\crawler\\Crawler\\tudo.json', `${JSON.stringify(array)},`, function (erro) {
         if (erro) {
           console.log(erro)
         }
       })
-    }
-    done();
-  }
-})
-
-for (i = 0; i < links.length; i++) {
-  c.queue({
-    uri: links[i],
-  })
 }

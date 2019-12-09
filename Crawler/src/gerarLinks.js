@@ -19,8 +19,7 @@ const c = new Crawler({
       for (i = 2; i < botoesComOsLinks.length; i++) {
         arrayComOsLinks.push(botoesComOsLinks[i].attribs.href)
       }
-      console.log(arrayComOsLinks.length)
-      fs.open('D:\\ProjetosDoGit\\Crawler\\links.txt', 'a+', (err, arrayComOsLinks) => {
+      fs.open('C:\\Users\\leona\\Documents\\crawler\\Crawler\\links.txt', 'as+', (err, arrayComOsLinks) => {
         if (err) {
           if (err.code === 'EEXIST') {
             console.error('myfile already exists');
@@ -29,12 +28,11 @@ const c = new Crawler({
           throw err;
         }
       })
-      fs.writeFile("D:\\ProjetosDoGit\\Crawler\\links.txt", arrayComOsLinks.join('\n'), function (erro) {
+      fs.writeFile("C:\\Users\\leona\\Documents\\crawler\\Crawler\\links.txt", arrayComOsLinks.join('\n'), function (erro) {
         if (erro) {
           console.log(erro)
         }
         else {
-          console.log("Arquivo salvo");
         }
       })
     }
