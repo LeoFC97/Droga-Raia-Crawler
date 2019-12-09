@@ -88,7 +88,7 @@ c.queue(links)
 
 let escreverJson = (array) => {
   console.log('Chamou Escrever');
-  fs.open('C:\\Users\\leona\\Documents\\crawler\\Crawler\\tudo.json', 'as+', (err, arrayComOsLinks) => {
+  fs.open('C:\\Users\\leona\\Documents\\crawler\\Medicamentos\\medicamentos.json', 'as+', (err, arrayComOsLinks) => {
         if (err) {
           if (err.code === 'EEXIST') {
             console.error('myfile already exists');
@@ -97,7 +97,7 @@ let escreverJson = (array) => {
           throw err;
         }
       })
-      fs.writeFile('C:\\Users\\leona\\Documents\\crawler\\Crawler\\tudo.json', `${JSON.stringify(array)},`, function (erro) {
+      fs.writeFile('C:\\Users\\leona\\Documents\\crawler\\Medicamentos\\medicamentos.json', `${JSON.stringify(array)},`, function (erro) {
         if (erro) {
           console.log(erro)
         }
