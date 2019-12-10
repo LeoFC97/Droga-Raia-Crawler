@@ -7,4 +7,4 @@ cd Beleza && npm install && cd .. && cd Medicamentos && npm install && cd.. && c
 
 Para executar:
 
-cd Beleza && npm run beleza && cd .. && cd Medicamentos && npm run medicamentos && cd Crianca && npm run crianca
+cd Beleza && npm run beleza && cd .. && cd Medicamentos && npm run medicamentos && cd .. && cd Crianca && npm run crianca
