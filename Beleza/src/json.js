@@ -15,9 +15,9 @@ const c = new Crawler({
       var $ = res.$;
       // $ is Cheerio by default
       //a lean implementation of core jQuery designed specifically for the server
-      var preco = $(`.cifra`)
+      var precoDiv = $("span[property='price']")
       try {
-        preco = preco[0].next.next.attribs.content
+        preco = precoDiv[0].attribs.content
       } catch (error) {
         preco=""
       }
@@ -72,11 +72,6 @@ const c = new Crawler({
         }
       } catch (error) {
         dosagem = ""
-      }
-      try {
-        preco = preco[1].next.next.attribs.content
-      } catch (error) {
-        preco=""
       }
       var obj = { codigoDoProduto,  ean, peso, quantidade, marca, fabricante, registroMS, principioAtivo, dosagem, preco};
       array.push(obj)
