@@ -23,10 +23,6 @@ const c = new Crawler({
       }
       try{
         var ean = datas[1].children[0].data
-
-
-
-
       }catch{
         var ean  = "";
       }
@@ -71,9 +67,9 @@ const c = new Crawler({
       } catch (error) {
         dosagem = ""
       }
-      var preco = $('.cifra')
+      var precoDiv = $("span[property='price']")
       try {
-        preco = preco[1].next.next.attribs.content
+        preco = precoDiv[0].attribs.content
       } catch (error) {
         preco=""
       }
